@@ -2,27 +2,26 @@
 
 CloudX: AWS Practitioner for JS #4 Course - Backend Repository
 
-## **Task 4**
+## **Task 5**
 
-### **Task 4. 1**
+### **Task 5. 1**
 
-- [x] **DynamoDB Tables**
+- [x] **`import-service`**
+  - [x] Create `import-service` with its own `serverless.yml` file
+  - [x] Create and configure S3 Bucket with a folder called `uploaded`
 
-  - [x] Create two tables in DynamoDB using AWS Console`
-  - [x] Write scripts to fill tables
+### **Task 5. 2**
 
-### **Task 4. 2**
+- [x] **Lambda & Configuration**
+  - [x] Create a lambda function called `importProductsFile` in `import-service` that is triggered with HTTP `GET` method to `/import` endpoint
+  - [x] Implement logic that accepts a query string as file name and returns a Signed URL
+  - [x] Update `serverless.yml` with policies to allow lambda to interact with S3
+  - [x] Integrate `importProductsFile` with FE
 
-- [x] **Configuration**
-  - [x] Configure `serverless.yaml`
-  - [x] Integrate `getProductsList` to request a list of products (joined stocks and products)
-  - [x] Integrate `getProductsById` to request a single product from database
+### **Task 5. 3**
 
-### **Task 4. 3**
-
-- [x] Create `createProduct` lambda
-- [x] Implement logic to create a new item on `products` table
-
-### **Task 4. 4**
-
-- [x] Commit all work to seperate branch
+- [x] **`importFileParser Lambda`**
+  - [x] Create `importFileParser` function
+  - [x] Configure `serverless.yml`
+  - [x] Configure the event to be fired when `uploaded` folder changes
+  - [x] Parse data using readable stream `csv-parser` and log in CloudWatch
