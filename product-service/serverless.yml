@@ -22,7 +22,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
 
   # you can overwrite defaults here
   stage: dev
@@ -78,6 +78,42 @@ functions:
           method: get
           cors:
             origin: '*'
+  createProduct:
+    handler: src/functions/createProduct/handler.createProduct
+    events:
+      - http:
+          path: products
+          method: post
+          cors:
+            origin: '*'
+resources:
+  Resources:
+    Products:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: products
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+    Stocks:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: stocks
+        AttributeDefinitions:
+          - AttributeName: product_id
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        KeySchema:
+          - AttributeName: product_id
+            KeyType: HASH
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
